@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -22,7 +24,19 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
-	
+    
+    def get(self, request, pk):
+        """Redirect to results if user has already voted on this question."""
+        # (And yes, this should be refactored.)
+        
+        user = request.user
+        question = get_object_or_404(Question, pk=pk)
+        
+        if user in question.alrvoted.all():
+            return HttpResponseRedirect(reverse('polls:results', args=(pk,)))
+        else:
+            return render(request, 'polls/detail.html', {'question': question})
+        
     def get_queryset(self):
         """
         Excludes any questions that aren't published yet.
@@ -49,6 +63,8 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
+        question.alrvoted.add(request.user)
+        question.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
