@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Polls app</title>
+  </head>
+
+  <body>
+
+    <h2>{{ question.question_text|safe }} : Add choice</h2><!-- Insecure, remove |safe tag to fix -->
+
+    <form action="" method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Submit">
+    </form>
+    
+    <a href="{% url 'polls:index' %}">Back to start</a>
+
+  </body>
+</html>

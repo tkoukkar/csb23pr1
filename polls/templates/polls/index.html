@@ -15,11 +15,11 @@
         <ul>
 		{% if user.is_authenticated %}
             {% for question in latest_question_list %}
-                <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+                <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text|safe }}</a></li><!-- Insecure, remove |safe tag to fix -->
             {% endfor %}
         {% else %}
             {% for question in latest_question_list %}
-                <li><a href="{% url 'polls:results' question.id %}">{{ question.question_text }}</a></li>
+                <li><a href="{% url 'polls:results' question.id %}">{{ question.question_text|safe }}</a></li><!-- Insecure, remove |safe tag to fix -->
             {% endfor %}
         {% endif %}
         </ul>
@@ -29,12 +29,12 @@
     
     {% if user.is_authenticated %}
         <p>You are currently logged in as {{ user.username }}.</p>
+        <p><a href="{% url 'polls:add_poll' %}">Add poll</a></p>
         <form action='/logout/' method="POST">
             {% csrf_token %}
             <input type="submit" value="Log out"/>
         </form>
     {% else %}
-	    <p>Log in to enable voting.</p>
         <form action='/login/' method="GET">
             {% csrf_token %}
             <input type="submit" value="Log in"/>

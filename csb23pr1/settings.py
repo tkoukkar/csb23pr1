@@ -23,7 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^6+ub#pf+3l1q@-kdxvk6l_fq#%=*5lou*%v@qqbu84+mm!_*b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True    # Oops (FLAW 3)
+# DEBUG = False    # Fix to the above
 
 ALLOWED_HOSTS = []
 
@@ -49,6 +50,44 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOKIE_HTTPONLY = False    # Allows cookie theft with JavaScript
+# SESSION_COOKIE_HTTPONLY = True    # Fix to the above
+
+# Fix to cookie security (FLAW 4)
+# - Set cookies to expire in 15 minutes rather than weeks or years
+# - Alternatively, the sesssion cookie (but not the CSRF cookie) could be set to expire at browser close (SESSION_EXPIRE_AT_BROWSER_CLOSE = True).
+#   ^ Relies on the user actually properly closing their browser, which seems fundamentally insecure.
+
+# SESSION_COOKIE_AGE = 900
+# CSRF_COOKIE_AGE = 900
+
+
+# Fixes to logging issues (FLAW 5)
+# - More extensive logs (level INFO rather than ERROR), storage in a file rather than email
+#
+# LOGGING = {
+#    "version": 1,
+#    "disable_existing_loggers": False,
+#    "handlers": {
+#        "console": {
+#            "class": "logging.StreamHandler",
+#        },
+#        "file": {
+#            "level": "INFO",
+#            "class": "logging.FileHandler",
+#            "filename": BASE_DIR / "logs/events.log",
+#        },
+#    },
+#    "loggers": {
+#        "django": {
+#            "handlers": ["console", "file"],
+#            "level": "INFO",
+#            "propagate": True,
+#        },
+#    },
+#}
 
 ROOT_URLCONF = 'csb23pr1.urls'
 
@@ -99,6 +138,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/polls/'
 LOGOUT_REDIRECT_URL = '/polls/'
 

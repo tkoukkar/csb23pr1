@@ -7,7 +7,7 @@
 
   <body>
 
-    <h1>{{ question.question_text }}</h1>
+    <h1>{{ question.question_text|safe }}</h1>    <!-- Insecure, remove |safe tag to fix -->
     
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     
@@ -15,9 +15,9 @@
         {% csrf_token %}
         {% for choice in question.choice_set.all %}
             <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text|safe }}</label><br>    <!-- Insecure, remove |safe tag to fix -->
         {% endfor %}
-		
+        
         <input type="submit" value="Vote">
     </form>
 

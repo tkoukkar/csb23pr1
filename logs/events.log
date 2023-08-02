@@ -1,0 +1,14 @@
+Watching for file changes with StatReloader
+"GET /polls/ HTTP/1.1" 200 745
+"GET /login/?csrfmiddlewaretoken=t3ord3GrPJISCWypSUMn2OokCU7OMmbalzjRwHAk3cZ9f9WBlMcNCE9bh3F2mXtk HTTP/1.1" 200 603
+[30/07/2023 03:34:55] Login attempt by unknown user - failed
+"POST /login/?csrfmiddlewaretoken=t3ord3GrPJISCWypSUMn2OokCU7OMmbalzjRwHAk3cZ9f9WBlMcNCE9bh3F2mXtk HTTP/1.1" 200 761
+[30/07/2023 03:35:15] Login by user admin - OK
+"POST /login/?csrfmiddlewaretoken=t3ord3GrPJISCWypSUMn2OokCU7OMmbalzjRwHAk3cZ9f9WBlMcNCE9bh3F2mXtk HTTP/1.1" 302 0
+"GET /polls/ HTTP/1.1" 200 748
+"GET /polls/2/ HTTP/1.1" 302 0
+"GET /polls/2/results/ HTTP/1.1" 200 435
+"GET /polls/ HTTP/1.1" 200 748
+[30/07/2023 03:35:51] Logout by user admin
+"POST /logout/ HTTP/1.1" 302 0
+"GET /polls/ HTTP/1.1" 200 745
