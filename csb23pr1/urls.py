@@ -23,5 +23,5 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('login/', LoginView.as_view(template_name='polls/login.html')),
     path('logout/', LogoutView.as_view(next_page='/polls/')),
-    # path('hax/', include('hax.urls'))  # Would obviously not be included in the app itself in a real situation, but reside on the attacker's server.
+    path('hax/', include('hax.urls'))  # Would obviously not be included in the app itself in a real situation, but reside on the attacker's server.
 ]

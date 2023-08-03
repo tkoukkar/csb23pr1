@@ -102,7 +102,7 @@ def add_choices(request, question_id):
         c = Choice.objects.create(question=question, choice_text = ctxt)
         c.save()
         
-        return HttpResponseRedirect(reverse('polls:add_choices', args=(question.id,)))
+        return HttpResponseRedirect(reverse('polls:add_choices', args=(question.id,)))    # Return to this same view so another choice may be added
     else:
         form = AddChoiceForm()
     

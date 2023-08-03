@@ -52,16 +52,16 @@ MIDDLEWARE = [
 ]
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+
+# Cookie security (FLAW 4)
+
 SESSION_COOKIE_HTTPONLY = False    # Allows cookie theft with JavaScript
 # SESSION_COOKIE_HTTPONLY = True    # Fix to the above
-
-# Fix to cookie security (FLAW 4)
-# - Set cookies to expire in 15 minutes rather than weeks or years
-# - Alternatively, the sesssion cookie (but not the CSRF cookie) could be set to expire at browser close (SESSION_EXPIRE_AT_BROWSER_CLOSE = True).
-#   ^ Relies on the user actually properly closing their browser, which seems fundamentally insecure.
-
 # SESSION_COOKIE_AGE = 900
 # CSRF_COOKIE_AGE = 900
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True    # Alternative to the SESSION_COOKIE_AGE fix
+                                            # - Pro: Takes effect immediately when user closes their browser
+                                            # - Con: Relies on the user actually properly closing their browser > seems fundamentally insecure
 
 
 # Fixes to logging issues (FLAW 5)
