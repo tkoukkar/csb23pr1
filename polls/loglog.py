@@ -13,7 +13,6 @@ def log_user_login(sender, user, **kwargs):
     """ log user login to user log """
     timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     msg = "[" + timestamp + "] Login by user " + user.username + " - OK"
-    #logger.info('Login: succesful, user %s', user)
     logger.info(msg)
 
 

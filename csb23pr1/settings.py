@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-^6+ub#pf+3l1q@-kdxvk6l_fq#%=*5lou*%v@qqbu84+mm!_*b
 DEBUG = True    # Oops (FLAW 3)
 # DEBUG = False    # Fix to the above
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []    # Causes an error when the fix above is applied (ie. when DEBUG = False).
+# ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']    # Replace the previous line with this one after applying the fix.
 
 
 # Application definition
@@ -62,7 +63,6 @@ SESSION_COOKIE_HTTPONLY = False    # Allows cookie theft with JavaScript
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = True    # Alternative to the SESSION_COOKIE_AGE fix
                                             # - Pro: Takes effect immediately when user closes their browser
                                             # - Con: Relies on the user actually properly closing their browser > seems fundamentally insecure
-
 
 # Fixes to logging issues (FLAW 5)
 # - More extensive logs (level INFO rather than ERROR), storage in a file rather than email

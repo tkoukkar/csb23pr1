@@ -7,7 +7,7 @@
 
   <body>
 
-    <h2>{{ question.question_text|safe }} : Add choice</h2><!-- Insecure, remove |safe tag to fix -->
+    <h2>{{ question.question_text|safe }} : Add choice</h2>    <!-- Insecure, remove |safe tag to fix -->
 
     <form action="" method="post" novalidate>
       {% csrf_token %}
