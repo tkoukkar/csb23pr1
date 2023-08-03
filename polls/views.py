@@ -1,5 +1,5 @@
-# import html    # Required for the fix to security against injection (lines 82, 100)
 # from django.contrib.auth.decorators import login_required    # Required for the fix to broken access control (lines 52, 78, 94)
+# import html    # Required for the fix to security against injection (lines 82, 100)
 
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
